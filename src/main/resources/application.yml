@@ -1,0 +1,33 @@
+spring:
+  jpa:
+    database: h2
+    hibernate:
+      ddl-auto: create
+    open-in-view: false
+    properties:
+      hibernate:
+        show_sql: true
+        format_sql: true
+  datasource:
+    hikari:
+      jdbc-url: jdbc:h2:mem:devcamp
+      username: sa
+      password:
+      driver-class-name: org.h2.Driver
+  h2:
+    console:
+      enabled: true
+
+springdoc:
+  api-docs:
+    groups:
+      enabled: true
+    path: /api-docs
+  swagger-ui:
+    path: /index.html
+    groups-order: asc
+  cache:
+    disabled: true
+  model-and-view-allowed: true
+  default-produces-media-type: application/json
+  default-consumes-media-type: application/json
