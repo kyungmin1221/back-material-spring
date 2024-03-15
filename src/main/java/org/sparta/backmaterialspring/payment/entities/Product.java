@@ -5,6 +5,8 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import org.sparta.backmaterialspring.common.entity.BaseEntity;
 
+import java.math.BigDecimal;
+
 @Entity
 @Getter
 public class Product extends BaseEntity {
@@ -14,8 +16,8 @@ public class Product extends BaseEntity {
     @Column(length = 255)
     private String name;
 
-    @Column(precision = 10, scale = 2)
-    private double price;
+    @Column
+    private Double price;
 
     @Column(columnDefinition = "int default 0")
     private int stock;

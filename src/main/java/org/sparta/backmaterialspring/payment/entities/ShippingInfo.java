@@ -8,7 +8,7 @@ public class ShippingInfo extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @OneToOne(mappedBy = "shippingInfo")
+    @OneToOne
     private Order order;
 
     @Column(length = 1000)
