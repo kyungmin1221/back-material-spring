@@ -1,8 +1,8 @@
-package org.sparta.backmaterialspring.common.payment.dto;
+package org.sparta.backmaterialspring.payment.dto;
 
 import lombok.Getter;
 import lombok.Setter;
-import org.sparta.backmaterialspring.common.payment.entities.OrderItem;
+import org.sparta.backmaterialspring.payment.entities.OrderItem;
 
 import java.util.List;
 
