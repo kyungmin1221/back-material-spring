@@ -1,4 +1,4 @@
-package org.sparta.backmaterialspring.payment.services;
+package org.sparta.backmaterialspring.payment.service;
 
 public interface IssuedCouponService {
     /**

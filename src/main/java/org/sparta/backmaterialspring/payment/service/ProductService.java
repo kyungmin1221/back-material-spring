@@ -1,6 +1,6 @@
-package org.sparta.backmaterialspring.payment.services;
+package org.sparta.backmaterialspring.payment.service;
 
-import org.sparta.backmaterialspring.payment.entities.Product;
+import org.sparta.backmaterialspring.payment.entity.Product;
 
 import java.util.List;
 

@@ -1,4 +1,4 @@
-package org.sparta.backmaterialspring.payment.entities;
+package org.sparta.backmaterialspring.payment.entity;
 
 import jakarta.persistence.*;
 import org.sparta.backmaterialspring.auth.entity.UserEntity;
@@ -49,8 +49,8 @@ public class Order extends BaseEntity {
     @Temporal(TemporalType.TIMESTAMP)
     private Date refundedAt;
 
-    @Column
-    private Object pgMetadata; // PG사 메타데이터
+//    @Column
+//    private Object pgMetadata;
 
     public Order() {
         super();

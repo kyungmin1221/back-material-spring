@@ -1,4 +1,4 @@
-package org.sparta.backmaterialspring.payment.entities;
+package org.sparta.backmaterialspring.payment.entity;
 
 import jakarta.persistence.*;
 import org.sparta.backmaterialspring.common.entity.BaseEntity;

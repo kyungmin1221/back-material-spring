@@ -1,9 +1,9 @@
-package org.sparta.backmaterialspring.payment.services.impl;
+package org.sparta.backmaterialspring.payment.service.impl;
 
 import lombok.RequiredArgsConstructor;
-import org.sparta.backmaterialspring.payment.entities.IssuedCoupon;
-import org.sparta.backmaterialspring.payment.repositories.IssuedCouponRepository;
-import org.sparta.backmaterialspring.payment.services.IssuedCouponService;
+import org.sparta.backmaterialspring.payment.entity.IssuedCoupon;
+import org.sparta.backmaterialspring.payment.repository.IssuedCouponRepository;
+import org.sparta.backmaterialspring.payment.service.IssuedCouponService;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;

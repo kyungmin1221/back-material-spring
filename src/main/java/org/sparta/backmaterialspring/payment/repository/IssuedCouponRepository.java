@@ -1,6 +1,6 @@
-package org.sparta.backmaterialspring.payment.repositories;
+package org.sparta.backmaterialspring.payment.repository;
 
-import org.sparta.backmaterialspring.payment.entities.IssuedCoupon;
+import org.sparta.backmaterialspring.payment.entity.IssuedCoupon;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

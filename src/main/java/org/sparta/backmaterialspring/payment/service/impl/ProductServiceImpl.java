@@ -1,12 +1,11 @@
-package org.sparta.backmaterialspring.payment.services.impl;
+package org.sparta.backmaterialspring.payment.service.impl;
 
 import lombok.RequiredArgsConstructor;
-import org.sparta.backmaterialspring.payment.entities.Product;
-import org.sparta.backmaterialspring.payment.repositories.ProductRepository;
-import org.sparta.backmaterialspring.payment.services.ProductService;
+import org.sparta.backmaterialspring.payment.entity.Product;
+import org.sparta.backmaterialspring.payment.repository.ProductRepository;
+import org.sparta.backmaterialspring.payment.service.ProductService;
 import org.springframework.stereotype.Service;
 
-import java.util.Arrays;
 import java.util.List;
 
 @Service

@@ -1,11 +1,9 @@
-package org.sparta.backmaterialspring.payment.entities;
+package org.sparta.backmaterialspring.payment.entity;
 
 
 import jakarta.persistence.*;
 import lombok.Getter;
 import org.sparta.backmaterialspring.common.entity.BaseEntity;
-
-import java.math.BigDecimal;
 
 @Entity
 @Getter

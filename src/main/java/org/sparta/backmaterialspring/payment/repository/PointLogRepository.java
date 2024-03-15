@@ -1,6 +1,6 @@
-package org.sparta.backmaterialspring.payment.repositories;
+package org.sparta.backmaterialspring.payment.repository;
 
-import org.sparta.backmaterialspring.payment.entities.PointLog;
+import org.sparta.backmaterialspring.payment.entity.PointLog;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
