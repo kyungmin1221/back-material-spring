@@ -1,6 +1,7 @@
 package org.sparta.backmaterialspring.payment.entity;
 
 import jakarta.persistence.*;
+import lombok.Getter;
 import org.sparta.backmaterialspring.auth.entity.UserEntity;
 import org.sparta.backmaterialspring.common.entity.BaseEntity;
 
@@ -9,6 +10,8 @@ import java.util.Date;
 import java.util.List;
 
 @Entity
+@Getter
+@Table(name = "ORDER_ENTRY")
 public class Order extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

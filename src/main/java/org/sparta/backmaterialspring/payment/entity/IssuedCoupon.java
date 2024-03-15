@@ -1,12 +1,16 @@
 package org.sparta.backmaterialspring.payment.entity;
 
 import jakarta.persistence.*;
+import lombok.AccessLevel;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 import org.sparta.backmaterialspring.auth.entity.UserEntity;
 import org.sparta.backmaterialspring.common.entity.BaseEntity;
 
 import java.util.Date;
 
 @Entity
+@Getter
 public class IssuedCoupon extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
