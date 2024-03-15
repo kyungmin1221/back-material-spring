@@ -47,7 +47,8 @@ public class SecurityConfig {
         // API 제어 설정 : 요청된 URI(URL) 기반으로 인증/인가 제어
         security.authorizeHttpRequests((request) ->
             request.requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll() // resources 접근 허용 설정
-                    .requestMatchers("/auth/**").permitAll() // 로그인 & 회원가입 & Refresh Token 갱신
+                    .requestMatchers("/auth/**").permitAll() // 로그인 & 회원가입 & Refresh Token 갱신 허가
+                    .requestMatchers("/actuator/health").permitAll() // health check API 허가
                     .anyRequest().authenticated() // 그 외 모든 요청 인증처리 진행
         );
 
