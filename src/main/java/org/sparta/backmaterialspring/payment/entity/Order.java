@@ -2,7 +2,7 @@ package org.sparta.backmaterialspring.payment.entity;
 
 import jakarta.persistence.*;
 import lombok.Getter;
-import org.sparta.backmaterialspring.auth.entity.UserEntity;
+import org.sparta.backmaterialspring.auth.entity.User;
 import org.sparta.backmaterialspring.common.entity.BaseEntity;
 
 import java.math.BigDecimal;
@@ -16,7 +16,7 @@ import java.util.Random;
 @Getter
 @Table(name = "ORDER_ENTRY")
 public class Order extends BaseEntity {
-    public Order(UserEntity user, List<OrderItem> items, ShippingInfo shippingInfo) {
+    public Order(User user, List<OrderItem> items, ShippingInfo shippingInfo) {
         this.user = user;
         this.amount = getCheckoutPrice();
         this.items = items;
@@ -30,7 +30,7 @@ public class Order extends BaseEntity {
 
     @ManyToOne
     @JoinColumn(name = "user_id")
-    private UserEntity user;
+    private User user;
 
     @Column(length = 255)
     private String orderNo;

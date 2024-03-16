@@ -2,7 +2,7 @@ package org.sparta.backmaterialspring.payment.facade.impl;
 
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
-import org.sparta.backmaterialspring.auth.entity.UserEntity;
+import org.sparta.backmaterialspring.auth.entity.User;
 import org.sparta.backmaterialspring.payment.dto.CreateOrderDto;
 import org.sparta.backmaterialspring.payment.dto.OrderInfoDto;
 import org.sparta.backmaterialspring.payment.entity.Order;
@@ -57,7 +57,7 @@ public class PaymentFacadeImpl implements PaymentFacade {
     }
 
     @Override
-    public Long completeOrder(Long orderId, UserEntity user) throws Exception {
+    public Long completeOrder(Long orderId, User user) throws Exception {
         Order orderById = orderService.getOrderById(orderId);
         if (!orderById.getStatus().equalsIgnoreCase("STAND_BY")) {
             throw new Exception("Order State is Illegal For Payment");

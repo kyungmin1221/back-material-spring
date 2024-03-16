@@ -1,6 +1,6 @@
 package org.sparta.backmaterialspring.payment.service;
 
-import org.sparta.backmaterialspring.auth.entity.UserEntity;
+import org.sparta.backmaterialspring.auth.entity.User;
 import org.sparta.backmaterialspring.payment.entity.*;
 
 import java.util.List;
@@ -14,7 +14,7 @@ public interface OrderService {
      * @param shippingInfo shippingInfo entity
      * @return created order
      */
-    Order createOrder(UserEntity user, List<OrderItem> orderItems, ShippingInfo shippingInfo);
+    Order createOrder(User user, List<OrderItem> orderItems, ShippingInfo shippingInfo);
 
     /**
      * 주문을 조회한다

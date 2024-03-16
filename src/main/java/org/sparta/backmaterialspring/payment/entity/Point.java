@@ -2,7 +2,7 @@ package org.sparta.backmaterialspring.payment.entity;
 
 import jakarta.persistence.*;
 import lombok.Getter;
-import org.sparta.backmaterialspring.auth.entity.UserEntity;
+import org.sparta.backmaterialspring.auth.entity.User;
 import org.sparta.backmaterialspring.common.entity.BaseEntity;
 
 import java.util.List;
@@ -15,7 +15,7 @@ public class Point extends BaseEntity {
     private Long id;
     @OneToOne
     @JoinColumn(name = "user_id")
-    private UserEntity user;
+    private User user;
 
     @Column
     private int availableAmount;

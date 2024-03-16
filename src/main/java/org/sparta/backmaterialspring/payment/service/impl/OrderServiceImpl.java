@@ -2,7 +2,7 @@ package org.sparta.backmaterialspring.payment.service.impl;
 
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
-import org.sparta.backmaterialspring.auth.entity.UserEntity;
+import org.sparta.backmaterialspring.auth.entity.User;
 import org.sparta.backmaterialspring.payment.entity.*;
 import org.sparta.backmaterialspring.payment.repository.OrderItemRepository;
 import org.sparta.backmaterialspring.payment.repository.OrderRepository;
@@ -20,7 +20,7 @@ public class OrderServiceImpl implements OrderService {
     private final OrderItemRepository orderItemRepository;
 
     @Override
-    public Order createOrder(UserEntity user, List<OrderItem> orderItems, ShippingInfo shippingInfo) {
+    public Order createOrder(User user, List<OrderItem> orderItems, ShippingInfo shippingInfo) {
         Order order = new Order(user, orderItems, shippingInfo);
         return orderRepository.save(order);
     }

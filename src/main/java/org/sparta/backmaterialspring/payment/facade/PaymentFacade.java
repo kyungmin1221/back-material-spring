@@ -1,6 +1,6 @@
 package org.sparta.backmaterialspring.payment.facade;
 
-import org.sparta.backmaterialspring.auth.entity.UserEntity;
+import org.sparta.backmaterialspring.auth.entity.User;
 import org.sparta.backmaterialspring.payment.dto.CreateOrderDto;
 import org.sparta.backmaterialspring.payment.dto.OrderInfoDto;
 
@@ -34,7 +34,7 @@ public interface PaymentFacade {
      * @return order entity
      * @throws Exception exception
      */
-    Long completeOrder(Long orderId, UserEntity user) throws Exception;
+    Long completeOrder(Long orderId, User user) throws Exception;
 
     /**
      * 대기상태의 주문을 취소한다.

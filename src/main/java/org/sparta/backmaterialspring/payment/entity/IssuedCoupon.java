@@ -1,10 +1,8 @@
 package org.sparta.backmaterialspring.payment.entity;
 
 import jakarta.persistence.*;
-import lombok.AccessLevel;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
-import org.sparta.backmaterialspring.auth.entity.UserEntity;
+import org.sparta.backmaterialspring.auth.entity.User;
 import org.sparta.backmaterialspring.common.entity.BaseEntity;
 
 import java.util.Date;
@@ -17,7 +15,7 @@ public class IssuedCoupon extends BaseEntity {
     private Long id;
     @ManyToOne
     @JoinColumn(name = "user_id")
-    private UserEntity user;
+    private User user;
 
     @ManyToOne
     @JoinColumn(name = "coupon_id")

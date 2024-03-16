@@ -2,7 +2,6 @@ package org.sparta.backmaterialspring.payment.service.impl;
 
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
-import org.sparta.backmaterialspring.auth.entity.UserEntity;
 import org.sparta.backmaterialspring.payment.entity.Point;
 import org.sparta.backmaterialspring.payment.entity.PointLog;
 import org.sparta.backmaterialspring.payment.repository.PointLogRepository;
