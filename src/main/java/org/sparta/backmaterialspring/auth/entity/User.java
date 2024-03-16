@@ -1,13 +1,9 @@
 package org.sparta.backmaterialspring.auth.entity;
 
 import jakarta.persistence.*;
-import lombok.AccessLevel;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
-import org.hibernate.annotations.ColumnDefault;
 import org.sparta.backmaterialspring.common.entity.BaseEntity;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -48,4 +44,14 @@ public class User extends BaseEntity {
 
     @OneToMany(mappedBy = "user")
     private List<AccessLog> accessLogs;
+
+    public User() {}
+
+    public User(String name, String email, String password, String phone, UserRole role) {
+        this.name = name;
+        this.email = email;
+        this.password = password;
+        this.phone = phone;
+        this.role = role;
+    }
 }
