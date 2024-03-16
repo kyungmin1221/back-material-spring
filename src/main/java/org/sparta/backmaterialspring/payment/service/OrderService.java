@@ -11,11 +11,10 @@ public interface OrderService {
      * 주문을 생성한다
      * @param user user entity
      * @param orderItems order item entity
-     * @param finalAmount all price of order item
      * @param shippingInfo shippingInfo entity
      * @return created order
      */
-    Order createOrder(UserEntity user, List<OrderItem> orderItems, double finalAmount, ShippingInfo shippingInfo);
+    Order createOrder(UserEntity user, List<OrderItem> orderItems, ShippingInfo shippingInfo);
 
     /**
      * 주문을 조회한다
@@ -63,6 +62,13 @@ public interface OrderService {
      * @throws Exception exception
      */
     void standbyOrder(Long orderId) throws Exception;
+
+    /**
+     * 주문의 대기상태를 취소한다.
+     * @param orderId order entity pk
+     * @throws Exception exception
+     */
+    void undoOrder(Long orderId) throws Exception;
 
     /**
      * 주문을 완료 상태로 저장한다

@@ -114,6 +114,10 @@ public class Order extends BaseEntity {
     }
 
     public void standbyOrder() {
+        this.status = "STAND_BY";
+    }
+
+    public void undoOrder() {
         this.status = "READY";
     }
 

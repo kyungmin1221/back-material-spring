@@ -20,7 +20,7 @@ public class OrderServiceImpl implements OrderService {
     private final OrderItemRepository orderItemRepository;
 
     @Override
-    public Order createOrder(UserEntity user, List<OrderItem> orderItems, double finalAmount, ShippingInfo shippingInfo) {
+    public Order createOrder(UserEntity user, List<OrderItem> orderItems, ShippingInfo shippingInfo) {
         Order order = new Order(user, orderItems, shippingInfo);
         return orderRepository.save(order);
     }
@@ -75,6 +75,14 @@ public class OrderServiceImpl implements OrderService {
     public void standbyOrder(Long orderId) throws Exception {
         Order orderById = getOrderById(orderId);
         orderById.standbyOrder();
+        orderRepository.save(orderById);
+    }
+
+    @Override
+    @Transactional
+    public void undoOrder(Long orderId) throws Exception {
+        Order orderById = getOrderById(orderId);
+        orderById.undoOrder();
         orderRepository.save(orderById);
     }
 

@@ -4,5 +4,5 @@ import org.sparta.backmaterialspring.auth.entity.UserEntity;
 import org.sparta.backmaterialspring.payment.entity.Point;
 
 public interface PointService {
-    void usePoint(Point point, UserEntity user, int amountToUse, String reason);
+    void usePoint(Point point, int amountToUse, String reason);
 }

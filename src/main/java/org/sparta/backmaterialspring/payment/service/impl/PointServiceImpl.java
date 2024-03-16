@@ -18,7 +18,7 @@ public class PointServiceImpl implements PointService {
 
     @Override
     @Transactional
-    public void usePoint(Point point, UserEntity user, int amountToUse, String reason) {
+    public void usePoint(Point point, int amountToUse, String reason) {
         PointLog log = PointLog.use(point, amountToUse, reason);
         pointLogRepository.save(log);
         point.getLogs().add(log);
