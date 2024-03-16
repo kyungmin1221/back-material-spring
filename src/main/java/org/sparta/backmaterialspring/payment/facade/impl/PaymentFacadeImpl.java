@@ -59,7 +59,7 @@ public class PaymentFacadeImpl implements PaymentFacade {
     @Override
     public Long completeOrder(Long orderId, UserEntity user) throws Exception {
         Order orderById = orderService.getOrderById(orderId);
-        if (!orderById.getStatus().equalsIgnoreCase("READY")) {
+        if (!orderById.getStatus().equalsIgnoreCase("STAND_BY")) {
             throw new Exception("Order State is Illegal For Payment");
         }
 
