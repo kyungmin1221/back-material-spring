@@ -1,20 +1,33 @@
 package org.sparta.backmaterialspring.common.config;
 
 import lombok.RequiredArgsConstructor;
+import org.sparta.backmaterialspring.auth.jwt.JwtProvider;
+import org.sparta.backmaterialspring.auth.repository.AccessLogRepository;
+import org.sparta.backmaterialspring.auth.security.JwtAuthenticationFilter;
+import org.sparta.backmaterialspring.auth.security.JwtAuthorizationFilter;
+import org.sparta.backmaterialspring.auth.security.UserDetailsServiceImpl;
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @Configuration
 @EnableWebSecurity
 @RequiredArgsConstructor
 public class SecurityConfig {
+
+    private final JwtProvider jwtProvider;
+    private final UserDetailsServiceImpl userDetailsService;
+    private final AuthenticationConfiguration authenticationConfiguration;
+    private final AccessLogRepository accessLogRepository;
 
     /**
      * Security 에서 제공하는 비밀번호 암호화 인터체이스의 구현체를 Bean 으로 등록
@@ -23,6 +36,36 @@ public class SecurityConfig {
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
+    }
+
+    /**
+     * Security 의 인증개체들을 관리하는 Manager Bean 등록
+     * @param configuration : Security 인증관리 설정 Bean
+     * @return AuthenticationManager
+     */
+    @Bean
+    public AuthenticationManager authenticationManager(AuthenticationConfiguration configuration) throws Exception {
+        return configuration.getAuthenticationManager();
+    }
+
+    /**
+     * Login & JWT 생성을 담당하는 Filter Bean 등록
+     * @return JwtAuthenticationFilter
+     */
+    @Bean
+    public JwtAuthenticationFilter jwtAuthenticationFilter() throws Exception {
+        JwtAuthenticationFilter filter = new JwtAuthenticationFilter(jwtProvider, accessLogRepository);
+        filter.setAuthenticationManager(authenticationManager(authenticationConfiguration));
+        return filter;
+    }
+
+    /**
+     * JWT 검증과 인가를 담당하는 Filter Bean 등록
+     * @return JwtAuthorizationFilter
+     */
+    @Bean
+    public JwtAuthorizationFilter jwtAuthorizationFilter() {
+        return new JwtAuthorizationFilter(jwtProvider, userDetailsService);
     }
 
     /**
@@ -51,6 +94,10 @@ public class SecurityConfig {
                     .requestMatchers("/actuator/health").permitAll() // health check API 허가
                     .anyRequest().authenticated() // 그 외 모든 요청 인증처리 진행
         );
+
+        // JWT 필터 등록
+        security.addFilterBefore(jwtAuthorizationFilter(), JwtAuthenticationFilter.class);
+        security.addFilterBefore(jwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
 
         return security.build();
     }

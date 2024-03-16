@@ -23,10 +23,16 @@ public class AccessLog extends BaseEntity {
     @Column
     private String ip;
 
-    @Column
-    private LocalDateTime accessAt;
-
     @ManyToOne(cascade = CascadeType.REMOVE)
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
+
+    public AccessLog() {}
+
+    public AccessLog(String ua, String endpoint, String ip, User user) {
+        this.ua = ua;
+        this.endpoint = endpoint;
+        this.ip = ip;
+        this.user = user;
+    }
 }

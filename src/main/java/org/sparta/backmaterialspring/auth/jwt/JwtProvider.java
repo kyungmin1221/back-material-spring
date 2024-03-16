@@ -23,7 +23,8 @@ import java.util.UUID;
 @Slf4j
 public class JwtProvider {
     // Header KEY 값
-    public static final String AUTHORIZATION_HEADER = "Authorization";
+    public static final String ACCESS_TOKEN_HEADER = "AccessToken";
+    public static final String REFRESH_TOKEN_HEADER = "RefreshToken";
     // Token 식별자
     public static final String BEARER_PREFIX = "Bearer ";
     // Access 토큰 만료시간
@@ -44,15 +45,15 @@ public class JwtProvider {
 
     /**
      * 토큰 생성을 위한 정보 인스턴스 생성
-     * @param userId : 사용자 고유 식별값
+     * @param email : 사용자 고유 식별값 (email)
      * @param tokenType : ACCESS | REFRESH
      * @return TokenPayload
      */
-    public TokenPayload createTokenPayload(Long userId, TokenType tokenType)  {
+    public TokenPayload createTokenPayload(String email, TokenType tokenType)  {
         Date date = new Date();
         long tokenTime = TokenType.ACCESS.equals(tokenType) ? ACCESS_TOKEN_TIME : REFRESH_TOKEN_TIME;
         return new TokenPayload(
-                userId.toString(),
+                email,
                 UUID.randomUUID().toString(),
                 date,
                 new Date(date.getTime() + tokenTime)
@@ -80,8 +81,8 @@ public class JwtProvider {
      * @param request : HTTP Request 정보
      * @return Header 에서 추출한 JWT
      */
-    public String getJwtFromHeader(HttpServletRequest request) {
-        String bearerToken = request.getHeader(AUTHORIZATION_HEADER);
+    public String getJwtFromHeader(HttpServletRequest request, TokenType tokenType) {
+        String bearerToken = request.getHeader(TokenType.ACCESS.equals(tokenType) ? ACCESS_TOKEN_HEADER : REFRESH_TOKEN_HEADER);
         if (StringUtils.hasText(bearerToken) && bearerToken.startsWith(BEARER_PREFIX)) {
             return bearerToken.substring(7);
         }
