@@ -14,9 +14,7 @@ public class IssuedCouponServiceImpl implements IssuedCouponService {
     private final IssuedCouponRepository issuedCouponRepository;
 
     @Override
-    public void useCoupon(Long couponId) throws Exception {
-        Optional<IssuedCoupon> couponById = findCouponById(couponId);
-        IssuedCoupon issuedCoupon = couponById.orElseThrow(Exception::new);
+    public void useCoupon(IssuedCoupon issuedCoupon) throws Exception {
         issuedCoupon.use();
         issuedCouponRepository.save(issuedCoupon);
     }

@@ -2,10 +2,12 @@ package org.sparta.backmaterialspring.payment.entity;
 
 import jakarta.persistence.*;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import org.sparta.backmaterialspring.common.entity.BaseEntity;
 
 @Entity
 @Getter
+@NoArgsConstructor
 public class PointLog extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,15 +25,18 @@ public class PointLog extends BaseEntity {
     @Column(length = 50)
     private String type; // PointLogType를 String으로 대체
 
-    public void use(int amount, String reason) {
+    public PointLog(Point point, int amount, String reason, String type) {
+        this.point = point;
         this.amount = amount;
         this.reason = reason;
-        this.type = "spend";
+        this.type = type;
     }
 
-    public void add(int amount, String reason) {
-        this.amount = amount;
-        this.reason = reason;
-        this.type = "earn";
+    public static PointLog use(Point point, int amount, String reason) {
+        return new PointLog(point, amount, reason, "use");
+    }
+
+    public static PointLog add(Point point, int amount, String reason) {
+        return new PointLog(point, amount, reason, "earn");
     }
 }

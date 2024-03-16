@@ -1,9 +1,11 @@
 package org.sparta.backmaterialspring.payment.service;
 
+import org.sparta.backmaterialspring.payment.entity.IssuedCoupon;
+
 public interface IssuedCouponService {
     /**
      * 발급된 쿠폰을 사용처리한다
-     * @param couponId coupon entity pk
+     * @param issuedCoupon coupon entity
      */
-    public void useCoupon(Long couponId) throws Exception;
+    void useCoupon(IssuedCoupon issuedCoupon) throws Exception;
 }

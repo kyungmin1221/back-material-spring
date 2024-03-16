@@ -6,13 +6,24 @@ import org.sparta.backmaterialspring.auth.entity.UserEntity;
 import org.sparta.backmaterialspring.common.entity.BaseEntity;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.List;
+import java.util.Random;
 
 @Entity
 @Getter
 @Table(name = "ORDER_ENTRY")
 public class Order extends BaseEntity {
+    public Order(UserEntity user, List<OrderItem> items, ShippingInfo shippingInfo) {
+        this.user = user;
+        this.amount = getCheckoutPrice();
+        this.items = items;
+        this.shippingInfo = shippingInfo;
+        setOrderNo();
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -25,7 +36,7 @@ public class Order extends BaseEntity {
     private String orderNo;
 
     @Column
-    private BigDecimal amount;
+    private Double amount;
 
     @Column(length = 100)
     private String status;
@@ -34,8 +45,8 @@ public class Order extends BaseEntity {
     @Column
     private List<OrderItem> items;
 
-    @Column(columnDefinition = "int default 0")
-    private int pointAmountUsed;
+    @Column(columnDefinition = "double default 0")
+    private Double pointAmountUsed;
 
     @OneToOne(mappedBy = "usedOrder")
     private IssuedCoupon usedIssuedCoupon;
@@ -62,19 +73,52 @@ public class Order extends BaseEntity {
     }
 
     private void setOrderNo() {
-        Date date = new Date();
-        String dateFormat = String.format("%d%02d%02d%02d%02d%02d",
-                date.getYear() + 1900,
-                date.getMonth() + 1,
-                date.getDate(),
-                date.getHours(),
-                date.getMinutes(),
-                date.getSeconds());
-        String randomString = "";
+        LocalDateTime now = LocalDateTime.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMddHHmmss");
+        String dateFormat = now.format(formatter);
+
+        Random random = new Random();
+        StringBuilder randomString = new StringBuilder();
         for (int i = 0; i < 15; i++) {
-            randomString += (char)('A' + Math.random() * 26);
+            char randomChar = (char) ('A' + random.nextInt(26));
+            randomString.append(randomChar);
         }
-        this.orderNo = dateFormat + "_" + randomString;
+        this.orderNo = dateFormat + "_" + randomString.toString();
+    }
+
+    public double getCheckoutPrice() {
+        double amount = items.stream().mapToDouble(OrderItem::getEntryPrice).sum();
+        amount -= this.pointAmountUsed;
+
+        Coupon coupon = this.usedIssuedCoupon.getCoupon();
+        if (coupon != null) {
+            if (coupon.getCouponType().equalsIgnoreCase("PERCENT-OFF")) {
+                amount *= (1 - coupon.getAmount());
+            } else if (coupon.getCouponType().equalsIgnoreCase("FIXED-AMOUNT-OFF")) {
+                amount -= coupon.getAmount();
+            }
+
+        }
+        this.amount = amount;
+        return amount;
+    }
+
+    public void applyPointToOrder(Double point) {
+       this.pointAmountUsed = point;
+       this.amount = getCheckoutPrice();
+    }
+
+    public void applyCouponToOrder(IssuedCoupon issuedCoupon) {
+        this.usedIssuedCoupon = issuedCoupon;
+        this.amount = getCheckoutPrice();
+    }
+
+    public void standbyOrder() {
+        this.status = "READY";
+    }
+
+    public void completeOrder() {
+        this.status = "COMPLETED";
     }
 
 }

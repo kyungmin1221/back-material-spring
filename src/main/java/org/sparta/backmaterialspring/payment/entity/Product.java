@@ -31,4 +31,11 @@ public class Product extends BaseEntity {
 
     @Column(length = 50)
     private String status = "available";
+
+    public void updateStock(Integer newStock) throws Exception {
+        if (this.stock - newStock < 0) {
+            throw new Exception("Out Of Stock");
+        }
+        this.stock = this.stock - newStock;
+    }
 }
