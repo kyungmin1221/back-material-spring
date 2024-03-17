@@ -13,8 +13,8 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class AuthServiceImpl implements AuthService {
 
-    private JwtProvider jwtProvider;
-    private UserRepository userRepository;
+    private final JwtProvider jwtProvider;
+    private final UserRepository userRepository;
 
     @Override
     public String refreshAccessToken(String refreshToken) {
