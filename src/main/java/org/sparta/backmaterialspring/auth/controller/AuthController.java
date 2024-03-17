@@ -12,10 +12,7 @@ import org.sparta.backmaterialspring.auth.service.TokenBlackListService;
 import org.sparta.backmaterialspring.auth.service.UserService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
@@ -35,7 +32,7 @@ public class AuthController {
     }
 
     @Operation(summary = "로그아웃")
-    @PostMapping("/logout")
+    @GetMapping("/logout")
     public ResponseEntity<Void> logout(HttpServletRequest request) {
         tokenBlackListService.addToBlacklist(
                 jwtProvider.getJwtFromHeader(request, TokenType.ACCESS),
@@ -45,10 +42,17 @@ public class AuthController {
     }
 
     @Operation(summary = "Token Refresh")
-    @PostMapping("/refresh")
+    @GetMapping("/refresh")
     public ResponseEntity<String> refresh(HttpServletRequest request) {
         String accessToken = authService.refreshAccessToken(jwtProvider.getJwtFromHeader(request, TokenType.REFRESH));
         return ResponseEntity.ok(accessToken);
+    }
+
+    @Operation(summary = "Token Blacklist 초기화")
+    @GetMapping("/blacklist/reset")
+    public ResponseEntity<Void> resetBlacklist() {
+        tokenBlackListService.removeExpiredTokens();
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 
 }

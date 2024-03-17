@@ -10,6 +10,7 @@ import org.sparta.backmaterialspring.auth.service.TokenBlackListService;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -47,6 +48,7 @@ public class TokenBlackListServiceImpl implements TokenBlackListService {
 
     @Override
     public void removeExpiredTokens() {
-        tokenBlackListRepository.deleteAllByExpiredTokens(new Date());
+        List<TokenBlackList> expiredList = tokenBlackListRepository.findAllByExpiresAtLessThan(new Date());
+        tokenBlackListRepository.deleteAllInBatch(expiredList);
     }
 }
