@@ -1,4 +1,4 @@
-package org.sparta.backmaterialspring.payment;
+package org.sparta.backmaterialspring.payment.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.json.simple.JSONObject;
