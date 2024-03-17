@@ -1,20 +1,20 @@
 package org.sparta.backmaterialspring.auth.entity;
 
 import jakarta.persistence.*;
-import lombok.AccessLevel;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import org.sparta.backmaterialspring.common.entity.BaseEntity;
 
-import java.time.LocalDateTime;
+import java.util.Date;
 
 @Entity
 @Getter
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class TokenBlackList extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Column
+    private String token;
 
     @Column
     private String jti;
@@ -24,5 +24,14 @@ public class TokenBlackList extends BaseEntity {
     private TokenType tokenType;
 
     @Column
-    private LocalDateTime expiresAt;
+    private Date expiresAt;
+
+    public TokenBlackList() {}
+
+    public TokenBlackList(String token, String jti, TokenType tokenType, Date expiresAt) {
+        this.token = token;
+        this.jti = jti;
+        this.tokenType = tokenType;
+        this.expiresAt = expiresAt;
+    }
 }

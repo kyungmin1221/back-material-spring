@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import org.sparta.backmaterialspring.common.entity.BaseEntity;
 
-import java.time.LocalDateTime;
+import java.util.Date;
 
 @Entity
 @Getter
@@ -20,7 +20,7 @@ public class AccessToken extends BaseEntity {
     private String token;
 
     @Column
-    private LocalDateTime expiresAt;
+    private Date expiresAt;
 
     @Column(columnDefinition = "boolean default false")
     private boolean isRevoke;

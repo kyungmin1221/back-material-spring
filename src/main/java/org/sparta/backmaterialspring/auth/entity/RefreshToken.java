@@ -1,12 +1,10 @@
 package org.sparta.backmaterialspring.auth.entity;
 
 import jakarta.persistence.*;
-import lombok.AccessLevel;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import org.sparta.backmaterialspring.common.entity.BaseEntity;
 
-import java.time.LocalDateTime;
+import java.util.Date;
 
 @Entity
 @Getter
@@ -22,7 +20,7 @@ public class RefreshToken extends BaseEntity {
     private String token;
 
     @Column
-    private LocalDateTime expiresAt;
+    private Date expiresAt;
 
     @Column(columnDefinition = "boolean default false")
     private boolean isRevoke;

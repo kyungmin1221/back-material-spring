@@ -49,6 +49,9 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
         }
     }
 
+    /**
+     * Login 성공
+     */
     @Override
     protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain, Authentication authResult) {
         User user = ((UserDetailsImpl) authResult.getPrincipal()).getUser();
@@ -68,6 +71,9 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
         accessLogRepository.save(accessLog);
     }
 
+    /**
+     * Login 실패
+     */
     @Override
     protected void unsuccessfulAuthentication(HttpServletRequest request, HttpServletResponse response, AuthenticationException failed) {
         response.setStatus(HttpStatus.UNAUTHORIZED.value());
