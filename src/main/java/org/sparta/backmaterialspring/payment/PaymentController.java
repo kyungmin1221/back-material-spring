@@ -42,7 +42,7 @@ public class PaymentController {
      * 토스를 포함한 대부분의 결제로직은 "인증"절차와 "승인"절차로 나뉘어져 있습니다.
      * "인증"은 말 그대로 고객이 해당 고객이 맞는지, 그리고 해당 결제를 지불할 능력이 있는지 인증하는 절차이고,
      * "승인"은 인증이 끝난 고객의 결제처리를 "승인"하는 절차입니다.
-     * "인증" 절차는 클라이언트에서 직접 토스(pg 사)서버와 연동해서 이루어지고,
+     * "인증" 절차는 클라이언트에서 직접 토스(pg사)서버와 연동해서 이루어지고,
      * 그 처리 결과를 토스 서버 혹은 우리의 클라이언트 쪽에서 직접 우리쪽으로 전달합니다.
      * 토스의 경우에는 클라이언트에서 우리 서버를 다시 호출하도록 구현되어있습니다.
      * 아래는 해당 호출을 받아서 결제 "승인" 처리를 하는 컨트롤러의 예시입니다.
@@ -140,7 +140,7 @@ public class PaymentController {
             return ResponseEntity.ok(result);
         }
 
-        // 결제가 취소처리된경우 주문 상태를 다시 대기로 되돌립니다.
+        // 결제가 성공하지 못한경우 주문 상태를 다시 대기로 되돌립니다.
         paymentFacade.undoOrder(Long.parseLong(orderId));
         result.setPaymentSuccess(false);
         result.setMessage("결제 승인 처리가 정상적으로 완료되지 않았습니다. \nStatus : " + (String) jsonObject.get("status"));
