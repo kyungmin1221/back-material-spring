@@ -44,4 +44,11 @@ public class AuthController {
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 
+    @Operation(summary = "Token Refresh")
+    @PostMapping("/refresh")
+    public ResponseEntity<String> refresh(HttpServletRequest request) {
+        String accessToken = authService.refreshAccessToken(jwtProvider.getJwtFromHeader(request, TokenType.REFRESH));
+        return ResponseEntity.ok(accessToken);
+    }
+
 }

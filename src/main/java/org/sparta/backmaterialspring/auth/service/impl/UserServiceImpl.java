@@ -6,7 +6,6 @@ import org.sparta.backmaterialspring.auth.dto.SignupResponseDto;
 import org.sparta.backmaterialspring.auth.entity.User;
 import org.sparta.backmaterialspring.auth.repository.UserRepository;
 import org.sparta.backmaterialspring.auth.service.UserService;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
