@@ -8,10 +8,6 @@
 
 2. 클론을 받은 뒤 아래 명령을 실행해주세요.
 ```bash
-# 패키지 설치
-
-# pre-commit hook 설치 (꼭 설치해주세요!)
-
 # 구동
 ```
 
@@ -38,33 +34,115 @@ Auth 서비스는 사용자의 인증과 권한 관리를 담당하는 중요한
 ### 디렉토리 구조 📂
 
 ```plaintext
-src/auth
-├── auth.module.ts
-├── controllers
-│   ├── auth.controller.ts
-│   └── index.ts
-├── dto
-│   ├── index.ts
-│   └── login-res.dto.ts
-├── entities
-│   ├── access-log.entity.ts
-│   ├── access-token.entity.ts
-│   ├── index.ts
-│   ├── refresh-token.entity.ts
-│   ├── token-blacklist.entity.ts
-│   └── user.entity.ts
-├── repositories
-│   ├── access-log.repository.ts
-│   ├── access-token.repository.ts
-│   ├── index.ts
-│   ├── refresh-token.repository.ts
-│   ├── token-blacklist.repository.ts
-│   └── user.repository.ts
-└── services
-    ├── auth.service.ts
-    ├── index.ts
-    ├── token-blacklist.service.ts
-    └── user.service.ts
+📦src
+ ┣ 📂main
+ ┃ ┣ 📂java
+ ┃ ┃ ┗ 📂org
+ ┃ ┃ ┃ ┗ 📂sparta
+ ┃ ┃ ┃ ┃ ┗ 📂backmaterialspring
+ ┃ ┃ ┃ ┃ ┃ ┣ 📂auth
+ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📂controller
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📜AuthController.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📂dto
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜CreateUserDto.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜LoginRequestDto.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📜SignupResponseDto.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📂entity
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜AccessLog.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜AccessToken.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜RefreshToken.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜TokenBlackList.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜TokenType.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜User.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📜UserRole.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📂jwt
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜JwtProvider.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📜TokenPayload.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📂repository
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜AccessLogRepository.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜AccessTokenRepository.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜RefreshTokenRepository.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜TokenBlackListRepository.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📜UserRepository.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📂security
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜JwtAuthenticationFilter.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜JwtAuthorizationFilter.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜UserDetailsImpl.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📜UserDetailsServiceImpl.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📂service
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📂impl
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜AuthServiceImpl.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜TokenBlackListServiceImpl.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📜UserServiceImpl.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜AuthService.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜TokenBlackListService.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📜UserService.java
+ ┃ ┃ ┃ ┃ ┃ ┣ 📂common
+ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📂config
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜JpaConfig.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜SecurityConfig.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📜SwaggerConfig.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📂dto
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📜ResponseDto.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📂entity
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜BaseEntity.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📜BusinessException.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📂interceptor
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📜LoggingInterceptor.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📂util
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📜HttpRequestUtils.java
+ ┃ ┃ ┃ ┃ ┃ ┣ 📂payment
+ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📂dto
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜CreateOrderDto.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜OrderInfoDto.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📜PaymentResultDto.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📂entity
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜Coupon.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜IssuedCoupon.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜Order.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜OrderItem.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜Point.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜PointLog.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜Product.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📜ShippingInfo.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📂facade
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📂impl
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📜PaymentFacadeImpl.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📜PaymentFacade.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📂repository
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜CouponRepository.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜IssuedCouponRepository.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜OrderItemRepository.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜OrderRepository.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜PointLogRepository.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜PointRepository.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜ProductRepository.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📜ShippingInfoRepository.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📂service
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📂impl
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜IssuedCouponServiceImpl.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜OrderServiceImpl.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜PointServiceImpl.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📜ProductServiceImpl.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜IssuedCouponService.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜OrderService.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜PointService.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📜ProductService.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📜PaymentController.java
+ ┃ ┃ ┃ ┃ ┃ ┗ 📜BackMaterialSpringApplication.java
+ ┃ ┗ 📂resources
+ ┃ ┃ ┣ 📜application-dev.yml
+ ┃ ┃ ┗ 📜application.yml
+ ┗ 📂test
+ ┃ ┣ 📂http
+ ┃ ┃ ┣ 📜auth.http
+ ┃ ┃ ┣ 📜http-client.env.json
+ ┃ ┃ ┗ 📜ping.http
+ ┃ ┗ 📂java
+ ┃ ┃ ┗ 📂org
+ ┃ ┃ ┃ ┗ 📂sparta
+ ┃ ┃ ┃ ┃ ┗ 📂backmaterialspring
+ ┃ ┃ ┃ ┃ ┃ ┗ 📜BackMaterialSpringApplicationTests.java
 ```
 
 ### 주요 기능 🚀
@@ -80,24 +158,6 @@ src/auth
    - 토큰 블랙리스트에 추가 및 조회: 특정 토큰을 블랙리스트에 추가하거나 조회하는 기능을 제공합니다.
 
 ### 보안 및 최적화 🛡️
-- **argon2**: 비밀번호 해싱에 argon2 알고리즘을 사용하여 보안을 강화합니다.
 - **JWT 블랙리스트**: 로그아웃 또는 다른 이유로 무효화된 토큰을 관리하여 보안을 더욱 강화합니다.
 - **접속 로그**: 사용자의 모든 접속 정보를 로그로 기록하여 추후 분석 및 모니터링에 활용합니다.
 
-### 예외 처리 🚧
-
-Auth 서비스는 다음과 같은 예외 처리를 수행합니다.
-
-1. **인증 실패 (Invalid Credentials)**
-   - 제공된 이메일과 비밀번호가 일치하지 않는 경우, `invalid-credentials` 오류를 반환합니다.
-
-2. **사용자 찾을 수 없음 (User Not Found)**
-   - 토큰에 포함된 사용자 ID가 데이터베이스에 없는 경우, `user-not-found` 오류를 반환합니다.
-
-3. **유효하지 않은 리프레시 토큰 (Invalid Refresh Token)**
-   - 제공된 리프레시 토큰이 유효하지 않은 경우, `invalid-refresh-token` 오류를 반환합니다.
-
-4. **유효하지 않은 만료 시간 (Invalid Expiry Time)**
-   - 토큰의 만료 시간이 유효하지 않은 형식인 경우, `invalid-expiry` 오류를 반환합니다.
-
-이러한 예외 처리는 사용자와 시스템 간의 상호 작용을 안전하게 하고, 예상치 못한 오류로부터 시스템을 보호하는 역할을 합니다.
