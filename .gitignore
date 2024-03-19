@@ -8,6 +8,9 @@ build/
 ### logs ###
 logs
 
+### volumnes ###
+volumes/**
+
 ### STS ###
 .apt_generated
 .classpath
