@@ -10,7 +10,7 @@ spring:
         format_sql: true
         dialect: org.hibernate.dialect.PostgreSQLDialect
   datasource:
-    url: jdbc:postgresql://localhost:5432/devcamp
+    url: jdbc:postgresql://docker-postgres:5432/devcamp
     username: user
     password: password
     driver-class-name: org.postgresql.Driver

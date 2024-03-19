@@ -10,7 +10,3 @@ IMG_LATEST_SERVER     		:= ${CONTAINER_NAME}-server-$$env:latest
 
 .run:
 	@sh docker/$$env.sh
-
-.kill:
-	@echo 'Killing container...'
-	@docker-compose -f docker/$$env/docker-compose-$$env.yaml -p ${CONTAINER_NAME}-server-$$env down

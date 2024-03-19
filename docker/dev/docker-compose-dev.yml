@@ -16,6 +16,7 @@ services:
       - PORT=${PORT}
       - TZ=${TZ}
   postgres:
+    container_name: docker-postgres
     image: postgres:latest
     environment:
       TZ: ${TZ}
