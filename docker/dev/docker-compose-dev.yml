@@ -12,17 +12,17 @@ services:
     ports:
       - "8080:8080"
     environment:
-      - PROFILE=dev
-      - PORT=8080
-      - TZ=Asia/Seoul
+      - PROFILE=${PROFILE}
+      - PORT=${PORT}
+      - TZ=${TZ}
   postgres:
     image: postgres:latest
     environment:
-      TZ: Asia/Seoul
-      POSTGRES_USER: user
-      POSTGRES_PASSWORD: password
-      POSTGRES_DB: devcamp
+      TZ: ${TZ}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
     ports:
       - '5432:5432'
     volumes:
-      - ./volumes/postgres_data:/var/lib/postgresql/data
+      - $PWD/volumes/postgres_data:/var/lib/postgresql/data

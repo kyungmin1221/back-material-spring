@@ -9,7 +9,8 @@ build/
 logs
 
 ### volumnes ###
-./docker/dev/volumes/**
+volumes/**
+
 ### STS ###
 .apt_generated
 .classpath
