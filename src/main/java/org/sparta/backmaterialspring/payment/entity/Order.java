@@ -45,7 +45,7 @@ public class Order extends BaseEntity {
     @Column
     private List<OrderItem> items;
 
-    @Column(columnDefinition = "double default 0")
+    @Column
     private Double pointAmountUsed;
 
     @OneToOne(mappedBy = "usedOrder")
