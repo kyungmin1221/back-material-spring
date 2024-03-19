@@ -7,16 +7,16 @@
 1. 이 프로젝트를 다운받으세요.
 
 2. 클론을 받은 뒤 아래 명령을 실행해주세요.
-```bash
- ./gradlew build
- ./gradlew bootRun
-```
-3. docker-compose 실행
-```bash
-   docker-compose up
-```
-- 현재 docker-compose는 application.yml(default) 기반으로 되어있습니다.
-- postgresql 기반으로 실행시키기 위해서는 application-dev.yml(개발)용 compose 파일을 생성하여 Dockerfile PROFILE 환경변수에 dev 값을 추가해줘야합니다.
+- local
+   ```bash
+    make -f docker/Makefile .build env=local
+    make -f docker/Makefile .run env=local
+   ```
+- dev
+   ```bash
+    make -f docker/Makefile .build env=dev
+    make -f docker/Makefile .run env=dev
+   ```
 
 ## 목적 🎯
 
