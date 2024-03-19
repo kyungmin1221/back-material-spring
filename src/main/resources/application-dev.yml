@@ -2,18 +2,17 @@ spring:
   jpa:
     database: postgresql
     hibernate:
-      # TODO: 수정 필요
       ddl-auto: create
     open-in-view: false
     properties:
       hibernate:
-        dialect: org.hibernate.dialect.PostgreSQLDialect
         show_sql: true
         format_sql: true
+        dialect: org.hibernate.dialect.PostgreSQLDialect
   datasource:
-    url: jdbc:postgresql://your_postgresql_host:port/your_database_name
-    username: your_username
-    password: your_password
+    url: jdbc:postgresql://localhost:5432/devcamp
+    username: user
+    password: password
     driver-class-name: org.postgresql.Driver
 
 springdoc:
