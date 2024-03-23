@@ -48,8 +48,8 @@ public class AuthController {
         return ResponseEntity.ok(accessToken);
     }
 
-    @Operation(summary = "Token Blacklist 초기화")
-    @GetMapping("/blacklist/reset")
+    @Operation(summary = "Token Blacklist (Batch) : Batch 서버에서 주기적으로 Expired 된 토큰 제거")
+    @DeleteMapping("/blacklist")
     public ResponseEntity<Void> resetBlacklist() {
         tokenBlackListService.removeExpiredTokens();
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();

@@ -1,22 +1,20 @@
 package org.sparta.backmaterialspring.auth.jwt;
 
-import io.jsonwebtoken.*;
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
 import io.jsonwebtoken.security.MacAlgorithm;
 import jakarta.annotation.PostConstruct;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
-import org.sparta.backmaterialspring.auth.entity.RefreshToken;
 import org.sparta.backmaterialspring.auth.entity.TokenType;
-import org.sparta.backmaterialspring.auth.entity.User;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
 import javax.crypto.SecretKey;
 import java.util.Date;
-import java.util.Objects;
 import java.util.UUID;
 
 @Component
